@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Животные</h2>
+    {% for animal in animal_list %}
+        <a href="{% url 'animal' animal.id %}"><h3>{{ animal.name }}</h3></a>
+        <h4>{{ animal.kind }}</h4>
+        <h4>{{ animal.get_kind }}</h4>
+        <h4>{{ animal.get_kind_display }}</h4>
+        <img src="{{ animal.get_img_url }}" alt="">
+    {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    
+</body>
+</html>
